@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AddressBook
 {
@@ -16,6 +17,15 @@ namespace AddressBook
     }
     class Program
     {
+        static List<Person> LoadAddressBook(string srcFilePath)
+        {
+
+        }
+
+        static void SaveAddressBook(List<Person> data, string destFilePath)
+        {
+
+        }
         static void Main(string[] args)
         {
         }
