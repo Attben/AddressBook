@@ -52,7 +52,7 @@ namespace AddressBook
             {
                 int ID = int.Parse(Console.ReadLine());
 
-                if (ID > addressBook.Count)
+                if (ID > addressBook.Count || ID < 0)
                 {
                     Console.WriteLine("Error: ID does not exist.");
                 }
