@@ -98,6 +98,14 @@ namespace AddressBook
                 {
                     AddPerson(addressBook);
                 }
+                else if(command == "print")
+                {
+                    for (int n = 0; n < addressBook.Count; ++n)
+                    {
+                        Console.WriteLine($"---Person number {n+1}");
+                        addressBook[n].Print();
+                    }
+                }
                 else if (command == "quit")
                 {
                     Console.WriteLine("Goodbye.");
