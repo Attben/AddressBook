@@ -120,10 +120,17 @@ namespace AddressBook
                 }
                 else if (command == "print")
                 {
-                    for (int n = 0; n < addressBook.Count; ++n)
+                    if (addressBook.Count == 0)
                     {
-                        Console.WriteLine($"---Person number {n + 1}");
-                        addressBook[n].Print();
+                        Console.WriteLine("Address book is empty.");
+                    }
+                    else
+                    {
+                        for (int n = 0; n < addressBook.Count; ++n)
+                        {
+                            Console.WriteLine($"---Person number {n + 1}");
+                            addressBook[n].Print();
+                        }
                     }
                 }
                 else if (command == "remove")
@@ -135,6 +142,14 @@ namespace AddressBook
                     Console.WriteLine("Saving address book. Goodbye.");
                     SaveAddressBook(addressBook, addressBookPath);
                     running = false;
+                }
+                else if (command == "")
+                {
+                    //do nothing
+                }
+                else
+                {
+                    Console.WriteLine($"Unrecognized command: {command}");
                 }
             }
         }
