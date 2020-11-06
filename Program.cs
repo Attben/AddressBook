@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Remoting.Services;
 
 namespace AddressBook
 {
@@ -44,6 +45,24 @@ namespace AddressBook
             string email = Console.ReadLine();
             addressBook.Add(new Person(name, address, phone, email));
         }
+
+        static void RemovePerson(List<Person> addressBook)
+        {
+            Console.Write("Enter the ID of the person you wish to remove: ");
+            int ID;
+            while (!int.TryParse(Console.ReadLine(), out ID)) ;
+
+            if (ID > addressBook.Count)
+            {
+                Console.WriteLine("Error: ID does not exist.");
+            }
+            else
+            {
+                addressBook.RemoveAt(ID - 1);
+                Console.WriteLine($"Removed person at ID {ID} from the address book.");
+            }
+        }
+
         static List<Person> LoadAddressBook(string srcFilePath)
         {
             List<Person> addressBook = new List<Person>();
@@ -63,10 +82,10 @@ namespace AddressBook
         static void SaveAddressBook(List<Person> addressBook, string destFilePath)
         {
             List<string> writeBuf = new List<string>();
-            foreach(Person p in addressBook)
+            foreach (Person p in addressBook)
             {
                 string[] personalInfo = p.GetData();
-                foreach(string s in personalInfo)
+                foreach (string s in personalInfo)
                 {
                     writeBuf.Add(s);
                 }
@@ -98,13 +117,17 @@ namespace AddressBook
                 {
                     AddPerson(addressBook);
                 }
-                else if(command == "print")
+                else if (command == "print")
                 {
                     for (int n = 0; n < addressBook.Count; ++n)
                     {
-                        Console.WriteLine($"---Person number {n+1}");
+                        Console.WriteLine($"---Person number {n + 1}");
                         addressBook[n].Print();
                     }
+                }
+                else if (command == "remove")
+                {
+                    RemovePerson(addressBook);
                 }
                 else if (command == "quit")
                 {
