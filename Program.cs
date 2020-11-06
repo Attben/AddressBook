@@ -18,6 +18,18 @@ namespace AddressBook
     }
     class Program
     {
+        static void AddPerson(List<Person> addressBook)
+        {
+            Console.Write("Enter name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter address: ");
+            string address = Console.ReadLine();
+            Console.Write("Enter phone number: ");
+            string phone = Console.ReadLine();
+            Console.Write("Enter email: ");
+            string email = Console.ReadLine();
+            addressBook.Add(new Person(name, address, phone, email));
+        }
         static List<Person> LoadAddressBook(string srcFilePath)
         {
             List<Person> addressBook = new List<Person>();
@@ -48,10 +60,26 @@ namespace AddressBook
             {
                 addressBook = LoadAddressBook(addressBookPath);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Could not load address book: " + ex.Message);
                 addressBook = new List<Person>();
+            }
+            bool running = true;
+            while (running)
+            {
+                Console.Write('>');
+                string command = Console.ReadLine().ToLower();
+
+                if (command == "add")
+                {
+                    AddPerson(addressBook);
+                }
+                else if (command == "quit")
+                {
+                    Console.WriteLine("Goodbye.");
+                    running = false;
+                }
             }
         }
     }
