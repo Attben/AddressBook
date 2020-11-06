@@ -48,17 +48,23 @@ namespace AddressBook
         static void RemovePerson(List<Person> addressBook)
         {
             Console.Write("Enter the ID of the person you wish to remove: ");
-            int ID;
-            while (!int.TryParse(Console.ReadLine(), out ID)) ;
+            try
+            {
+                int ID = int.Parse(Console.ReadLine());
 
-            if (ID > addressBook.Count)
-            {
-                Console.WriteLine("Error: ID does not exist.");
+                if (ID > addressBook.Count)
+                {
+                    Console.WriteLine("Error: ID does not exist.");
+                }
+                else
+                {
+                    addressBook.RemoveAt(ID - 1);
+                    Console.WriteLine($"Removed person at ID {ID} from the address book.");
+                }
             }
-            else
+            catch (FormatException)
             {
-                addressBook.RemoveAt(ID - 1);
-                Console.WriteLine($"Removed person at ID {ID} from the address book.");
+                Console.WriteLine("Error: Chosen ID is not a number.");
             }
         }
 
