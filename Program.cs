@@ -81,6 +81,7 @@ namespace AddressBook
 
         static void SaveAddressBook(List<Person> addressBook, string destFilePath)
         {
+            //Probably space inefficient. Would probably work better with file streams.
             List<string> writeBuf = new List<string>();
             foreach (Person p in addressBook)
             {
@@ -131,7 +132,7 @@ namespace AddressBook
                 }
                 else if (command == "quit")
                 {
-                    Console.WriteLine("Goodbye.");
+                    Console.WriteLine("Saving address book. Goodbye.");
                     SaveAddressBook(addressBook, addressBookPath);
                     running = false;
                 }
