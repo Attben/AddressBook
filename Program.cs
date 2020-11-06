@@ -15,6 +15,20 @@ namespace AddressBook
             this.phone = phone;
             this.email = email;
         }
+
+        public string[] GetData()
+        {
+            string[] data = { name, address, phone, email };
+            return data;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"Name: {name}");
+            Console.WriteLine($"Address: {address}");
+            Console.WriteLine($"Phone number: {phone}");
+            Console.WriteLine($"Email: {email}");
+        }
     }
     class Program
     {
@@ -46,9 +60,18 @@ namespace AddressBook
             return addressBook;
         }
 
-        static void SaveAddressBook(List<Person> data, string destFilePath)
+        static void SaveAddressBook(List<Person> addressBook, string destFilePath)
         {
-            //NYI
+            List<string> writeBuf = new List<string>();
+            foreach(Person p in addressBook)
+            {
+                string[] personalInfo = p.GetData();
+                foreach(string s in personalInfo)
+                {
+                    writeBuf.Add(s);
+                }
+            }
+            File.WriteAllLines(destFilePath, writeBuf);
         }
         static void Main()
         {
@@ -78,6 +101,7 @@ namespace AddressBook
                 else if (command == "quit")
                 {
                     Console.WriteLine("Goodbye.");
+                    SaveAddressBook(addressBook, addressBookPath);
                     running = false;
                 }
             }
