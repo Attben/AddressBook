@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Remoting.Services;
 
 namespace AddressBook
 {
@@ -108,6 +107,7 @@ namespace AddressBook
                 Console.WriteLine("Could not load address book: " + ex.Message);
                 addressBook = new List<Person>();
             }
+
             bool running = true;
             while (running)
             {
